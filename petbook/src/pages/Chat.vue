@@ -1,9 +1,32 @@
 <script>
+import { triggerRef } from 'vue';
 import MainH1 from '../components/MainH1.vue'
+import { saveMessage, subscribeToChatMessages } from '../services/chat.js';
 
 export default {
     name: 'Chat',
     components: {MainH1},
+    data() {
+        return {
+            messages: [],
+            formMessage: {
+                email: '',
+                message: '',
+            }
+        }
+    },
+    methods: {
+        sendMessage() {
+            saveMessage({
+                email: this.formMessage.email,
+                message: this.formMessage.message,
+            });
+            this.formMessage.message = "";
+        }
+    },
+    mounted() {
+        subscribeToChatMessages(newMessages => this.messages = newMessages);
+    }
 }
 </script>
 
@@ -13,13 +36,20 @@ export default {
     <div class="flex gap-4 justify-between">
         <section class="w-9/12">
             <h2 class="sr-only">Lista de mensajes</h2>
-            <div class="border rounded p-4 min-h-[400px]">
+            <ul class="border rounded p-4 min-h-[400px]">
                 <!-- mensajes -->
-            </div>
+                <li v-for="message in messages">
+                    <p><b>{{ message.email }}</b></p>
+                    <p>{{ message.message }}</p>
+                </li>
+            </ul>
         </section>
         <section class="w-3/12">
             <h2>Enviar un mensaje</h2>
-            <form action="#">
+            <form
+                action="#"
+                @submit.prevent="sendMessage"
+            >
                 <div>
                     <label
                         class="block mb-2 w-full"
@@ -29,6 +59,7 @@ export default {
                         class="p-2 border rounded border-gray-300"
                         type="email"
                         id="email"
+                        v-model="formMessage.email"
                     >
                 </div>
                 <div>
@@ -39,6 +70,7 @@ export default {
                     <textarea
                         class="border border-gray-300 block mb-2 w-full"
                         id="message"
+                        v-model="formMessage.message"
                     ></textarea>
                 </div>
                 <button
