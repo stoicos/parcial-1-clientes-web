@@ -1,4 +1,4 @@
-import { collection, addDoc, onSnapshot } from "firebase/firestore";
+import { collection, addDoc, onSnapshot, serverTimestamp, query, orderBy } from "firebase/firestore";
 import { db } from "./firebase.js";
 
 /**
@@ -12,6 +12,7 @@ export function saveMessage(data) {
 
     return addDoc(refChat, {
         ...data,
+        created_at: serverTimestamp(),
     })
         .then(doc => {
 
@@ -21,11 +22,14 @@ export function saveMessage(data) {
 export function subscribeToChatMessages(callback) {
     const refChat = collection(db, 'chat');
 
-    onSnapshot(refChat, snapshot => {
+    const q = query(refChat, orderBy('created_at'));
+
+    onSnapshot(q, snapshot => {
         const messages = snapshot.docs.map(doc => {
             return {
                 email: doc.data().email,
                 message: doc.data().message,
+                created_at: doc.data().created_at.toDate(),
             }
         });
         callback(messages)
