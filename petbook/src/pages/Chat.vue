@@ -68,7 +68,7 @@ export default {
                 action="#"
                 @submit.prevent="sendMessage"
             >
-                <div>
+                <div class="mb-3">
                     <label
                         class="block mb-2 w-full"
                         for="email"
