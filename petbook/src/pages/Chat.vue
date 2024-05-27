@@ -3,6 +3,7 @@ import { triggerRef } from 'vue';
 import MainH1 from '../components/MainH1.vue'
 import { saveMessage, subscribeToChatMessages } from '../services/chat.js';
 import Loader from '../components/Loader.vue';
+import {suscribeToAuth} from '../services/auth.js'
 
 export default {
     name: 'Chat',
@@ -11,18 +12,24 @@ export default {
         return {
             messages: [],
             formMessage: {
-                email: '',
                 message: '',
             },
             messagesLoaded: false,
             sendingMessage: false,
+            authUser: {
+                id: null,
+                email: null,
+            },
+            unsubscribeFromAuth: () => {},
+            unsubscribeFromChat: () => {},
         }
     },
     methods: {
         sendMessage() {
             this.sendingMessage = true,
             saveMessage({
-                email: this.formMessage.email,
+                user_id: this.authUser.id,
+                email: this.authUser.email,
                 message: this.formMessage.message,
             }).then(() => this.sendingMessage = false);
             this.formMessage.message = "";
@@ -35,10 +42,15 @@ export default {
         }
     },
     mounted() {
-        subscribeToChatMessages(newMessages => {
+        this.unsubscribeFromChat = subscribeToChatMessages(newMessages => {
             this.messages = newMessages
             this.messagesLoaded = true
         });
+        this.unsubscribeFromAuth = suscribeToAuth(newUserData => this.authUser = newUserData)
+    },
+    unmounted() {
+        this.unsubscribeFromChat()
+        this.unsubscribeFromAuth()
     }
 }
 </script>
@@ -53,7 +65,10 @@ export default {
                         v-if="messagesLoaded"
                 >
                     <!-- mensajes -->
-                    <li v-for="message in messages">
+                    <li
+                        v-for="message in messages"
+                        class="mb-3"
+                    >
                         <p><b>{{ message.email }}</b></p>
                         <p>{{ message.message }}</p>
                         <p>{{ formatDate(message.created_at) }}</p>
@@ -69,17 +84,11 @@ export default {
                 @submit.prevent="sendMessage"
             >
                 <div class="mb-3">
-                    <label
+                    <span
                         class="block mb-2 w-full"
                         for="email"
-                    >Email</label>
-                    <input
-                        class="p-2 border rounded border-gray-300 disabled:bg-gray-300"
-                        type="email"
-                        id="email"
-                        v-model="formMessage.email"
-                        :disabled="sendingMessage"
-                    >
+                    >Email</span>
+                    <span>{{ authUser.email }}</span>
                 </div>
                 <div>
                     <label

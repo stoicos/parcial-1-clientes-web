@@ -10,14 +10,13 @@ let userData = EMPTY_USER_DATA;
 
 onAuthStateChanged(auth, user => {
     if(user) {
-        userData = {
+        setUserData({
             id: user.uid,
             email: user.email
-        }
+        })
     } else {
-        userData = EMPTY_USER_DATA
+        setUserData(EMPTY_USER_DATA)
     }
-    notifyAll();
 })
 
 let observers = [];
@@ -26,6 +25,8 @@ export function suscribeToAuth(callback) {
     observers.push(callback);
 
     notify(callback);
+
+    return () => observers = observers.filter(obs => obs !== callback);
 }
 
 function notify(observer) {
@@ -58,4 +59,12 @@ export function login(email, password) {
 
 export function logout() {
     return signOut(auth);
+}
+
+function setUserData(newData) {
+    userData = {
+        ...userData,
+        ...newData,
+    };
+    notifyAll();
 }
