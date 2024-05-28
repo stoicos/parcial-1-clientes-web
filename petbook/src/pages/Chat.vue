@@ -3,11 +3,14 @@ import { triggerRef } from 'vue';
 import MainH1 from '../components/MainH1.vue'
 import { saveMessage, subscribeToChatMessages } from '../services/chat.js';
 import Loader from '../components/Loader.vue';
+import MainLabel from '../components/MainLabel.vue'
+import MainButton from '../components/MainButton.vue'
 import {suscribeToAuth} from '../services/auth.js'
+import MainTextarea from '../components/MainTextarea.vue';
 
 export default {
     name: 'Chat',
-    components: {MainH1, Loader},
+    components: {MainH1, Loader, MainLabel, MainButton, MainTextarea},
     data() {
         return {
             messages: [],
@@ -69,7 +72,7 @@ export default {
                         v-for="message in messages"
                         class="mb-3"
                     >
-                        <p><b>{{ message.email }}</b></p>
+                        <p><b><router-link :to="`/usuario/${message.user_id}`">{{ message.email }}</router-link></b></p>
                         <p>{{ message.message }}</p>
                         <p>{{ formatDate(message.created_at) }}</p>
                     </li>
@@ -91,25 +94,18 @@ export default {
                     <span>{{ authUser.email }}</span>
                 </div>
                 <div>
-                    <label
-                        class="block mb-2 w-full"
-                        for="message"
-                    >Mensaje</label>
-                    <textarea
-                        class="border border-gray-300 block mb-2 w-full disabled:bg-gray-300"
+                    <MainLabel for="message">Mensaje</MainLabel>
+                    <MainTextarea
+                        
                         id="message"
                         v-model="formMessage.message"
                         :disabled="sendingMessage"
-                    ></textarea>
+                    ></MainTextarea>
                 </div>
-                <button
-                    class="transition-all py-2 px-4 w-full bg-blue-600 hover:bg-blue-400 active:bg-blue-800 text-white"
-                    type="submit"
-                    :disabled="sendingMessage"
-                >
+                <MainButton :disabled="sendingMessage">
                     <template   v-if="!sendingMessage">Enviar</template>
                     <Loader     v-else />
-                </button>
+                </MainButton>
             </form>
         </section>
 

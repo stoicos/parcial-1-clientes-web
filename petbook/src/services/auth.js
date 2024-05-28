@@ -21,7 +21,7 @@ onAuthStateChanged(auth, user => {
 
 let observers = [];
 
-export function suscribeToAuth(callback) {
+export function subscribeToAuth(callback) {
     observers.push(callback);
 
     notify(callback);

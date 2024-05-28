@@ -1,8 +1,6 @@
 <script>
-import { onAuthStateChanged } from 'firebase/auth';
 import Home from './pages/Home.vue';
-import { logout, suscribeToAuth } from './services/auth';
-import { auth } from './services/firebase';
+import { logout, subscribeToAuth } from './services/auth';
 
 export default {
     name: 'App',
@@ -24,35 +22,37 @@ export default {
         }
     },
     mounted() {
-        suscribeToAuth(newUserData => this.authUser = newUserData)
+        subscribeToAuth(newUserData => this.authUser = newUserData)
     }
 }
 </script>
 
 <template>
-    <div class="grid grid-rows-[60px_1fr_100px] h-full">
-            <nav class="p-4 bg-slate-300 text-gray-800 flex justify-between">
-                <p>Petbook</p>
-                <ul class="flex gap-4">
-                    <li><router-link to="/">Inicio</router-link></li>
-                    <template v-if="authUser.id === null">
-                        <li><router-link to="/iniciar-sesion">Iniciar Sesión</router-link></li>
-                        <li><router-link to="/registro">Registro</router-link></li>
-                    </template>
-                    <template v-else>
-                        <li><router-link to="/chat">Chat Público</router-link></li>
-                        <li><router-link to="/perfil">Mi perfil {{ authUser.email }}</router-link></li>
-                        <li><form action="#" @submit.prevent="handleLogout">
-                            <button type="submit">Salir</button>
-                        </form></li>
-                    </template>
+    <div class="grid grid-rows-layout h-full">
+        <nav class="flex justify-between h-[60px] bg-slate-300 p-4 text-gray-900">
+            <p>DV Social</p>
+            <ul class="flex gap-4">
+                <li><router-link to="/">Inicio</router-link></li>
+                <template v-if="authUser.id === null">
+                    <li><router-link to="/iniciar-sesion">Iniciar Sesión</router-link></li>
+                    <li><router-link to="/registro">Registro</router-link></li>
+                </template>
+                <template v-else>
+                    <li><router-link to="/chat">Chat Público</router-link></li>
+                    <li><router-link to="/perfil">Mi Perfil</router-link></li>
+                    <li>
+                        <form action="#" @submit.prevent="handleLogout">
+                            <button type="submit">{{ authUser.email }} (Cerrar Sesión)</button>
+                        </form>
+                    </li>
+                </template>
             </ul>
         </nav>
-        <main class="container mx-auto p-4">
-            <router-view></router-view>
+        <main class="container p-4 mx-auto">
+            <router-view />
         </main>
-        <footer class="flex justify-center items-center bg-slate-900 text-white">
-            <p>Petbook web</p>
+        <footer class="flex justify-center items-center h-footer bg-slate-900 text-white">
+            <p>Copyright &copy; Da Vinci 2024</p>
         </footer>
     </div>
 </template>
