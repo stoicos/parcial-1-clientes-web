@@ -11,6 +11,7 @@ export default {
             user: {
                 email: '',
                 password: '',
+                name: '',
             },
             loading: false,
         };
@@ -19,7 +20,7 @@ export default {
         async handleSubmit() {
             this.loading = true;
             try {
-                await register(this.user.email, this.user.password);
+                await register(this.user.email, this.user.password, this.user.name);
                 this.$router.push({
                     path: '/perfil',
                 })
@@ -51,6 +52,19 @@ export default {
                 class="w-full p-2 border border-gray-300 rounded disabled:bg-gray-100"
                 :disabled="loading"
                 v-model="user.email"
+            >
+        </div>
+        <div class="mb-3">
+            <label 
+                for="name"
+                class="block mb-2"
+            >Nombre</label>
+            <input
+                type="text"
+                id="name"
+                class="w-full p-2 border border-gray-300 rounded disabled:bg-gray-100"
+                :disabled="loading"
+                v-model="user.name"
             >
         </div>
         <div class="mb-3">
