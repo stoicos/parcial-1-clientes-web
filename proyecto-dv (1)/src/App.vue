@@ -43,7 +43,7 @@ export default {
                     <li><router-link to="/registro">Registro</router-link></li>
                 </template>
                 <template v-else>
-                    <li><router-link to="/chat">Chat Público</router-link></li>
+                    <li><router-link to="/posts">Chat Público</router-link></li>
                     <li><router-link to="/perfil">Mi Perfil</router-link></li>
                     <li>
                         <form action="#" @submit.prevent="handleLogout">

@@ -2,7 +2,7 @@
 
 import { createRouter, createWebHashHistory, createWebHistory } from "vue-router";
 import Home from "../pages/Home.vue";
-import Chat from "../pages/Chat.vue";
+import Posts from "../pages/Posts.vue";
 import Login from "../pages/Login.vue";
 import Register from "../pages/Register.vue";
 import MyProfile from "../pages/MyProfile.vue";
@@ -14,7 +14,7 @@ const routes = [
     { path: '/',                        component: Home, },
     { path: '/iniciar-sesion',          component: Login, },
     { path: '/registro',                component: Register, },
-    { path: '/chat',                    component: Chat,                meta: { requiresAuth: true } },
+    { path: '/posts',                    component: Posts,                meta: { requiresAuth: true } },
     { path: '/perfil',                  component: MyProfile,           meta: { requiresAuth: true } },
     { path: '/usuario/:id',             component: UserProfile,         meta: { requiresAuth: true } },
 ];

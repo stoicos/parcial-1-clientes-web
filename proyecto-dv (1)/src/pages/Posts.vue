@@ -21,7 +21,7 @@ import { savePost, subscribeToAllPosts } from '../services/post';
 // ];
 
 export default {
-    name: 'Chat',
+    name: 'Posts',
     components: {MainH1, Loader},
     // data() {
     data: function() {
