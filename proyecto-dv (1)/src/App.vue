@@ -1,6 +1,7 @@
 <script>
 import Home from './pages/Home.vue';
 import { logout, subscribeToAuth } from './services/auth';
+import { auth } from './services/firebase';
 
 export default {
     name: 'App',

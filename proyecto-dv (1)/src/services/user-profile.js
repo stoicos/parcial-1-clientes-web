@@ -16,6 +16,7 @@ export async function getUserProfileById(id) {
     return {
         id: userDoc.id, // la propiedad "id" del documento retorna el id del mismo.
         email: userDoc.data().email,
+        name: userDoc.data().name,
     }
 }
 

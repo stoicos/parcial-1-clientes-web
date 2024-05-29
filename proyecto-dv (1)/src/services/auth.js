@@ -48,6 +48,9 @@ export async function register(email, password, name) {
         const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
         console.log("Usuario creado. ID: ", userCredentials.user.uid)
 
+
+        // displayname
+
         //Creamos el perfil del usuario
         await createUserProfile(userCredentials.user.uid, {email, name});
     } catch (error) {
