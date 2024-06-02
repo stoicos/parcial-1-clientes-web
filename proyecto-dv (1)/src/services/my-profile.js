@@ -10,6 +10,7 @@ export function subscribeToUserPosts(callback, userEmail) {
 
         const posts = snapshot.docs.map(doc => {
             return {
+                id: doc.id,
                 user_id: doc.data().user_id,
                 email: doc.data().email,
                 content: doc.data().content,

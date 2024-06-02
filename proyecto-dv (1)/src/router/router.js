@@ -7,6 +7,7 @@ import Login from "../pages/Login.vue";
 import Register from "../pages/Register.vue";
 import MyProfile from "../pages/MyProfile.vue";
 import UserProfile from "../pages/UserProfile.vue";
+import Post from "../pages/Post.vue";
 import { subscribeToAuth } from "../services/auth";
 
 // Definimos el array de rutas.
@@ -14,7 +15,8 @@ const routes = [
     { path: '/',                        component: Home, },
     { path: '/iniciar-sesion',          component: Login, },
     { path: '/registro',                component: Register, },
-    { path: '/posts',                    component: Posts,                meta: { requiresAuth: true } },
+    { path: '/posts',                   component: Posts,               meta: { requiresAuth: true } },
+    { path: '/post/:id',                component: Post,                meta: { requiresAuth: true } },
     { path: '/perfil',                  component: MyProfile,           meta: { requiresAuth: true } },
     { path: '/usuario/:id',             component: UserProfile,         meta: { requiresAuth: true } },
 ];

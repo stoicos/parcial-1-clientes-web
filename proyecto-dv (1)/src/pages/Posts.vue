@@ -27,6 +27,7 @@ export default {
     data: function() {
         return {
             newPost: {
+                id: '',
                 content: '',
             },
             creatingPost: false,
@@ -47,6 +48,7 @@ export default {
             this.creatingPost = true;
 
             savePost({
+                id: this.newPost.id,
                 user_id: this.authUser.id,
                 email: this.authUser.email,
                 content: this.newPost.content,
@@ -107,16 +109,17 @@ export default {
                             class="mb-2"
                         >
                             <p>
+                                <router-link :to="`/post/${post.id}`"><h2 class="text-4xl">Titulo</h2></router-link>
                                 <b>
                                     <router-link 
                                         :to="`/usuario/${post.user_id}`"
                                         class="text-blue-700 underline"
                                     >{{ post.email }} </router-link>
-                                    dijo:
                                 </b>
                             </p>
                             <p>{{ post.content }}</p>
                             <p>{{ formatDate(post.created_at) }}</p>
+                            
                         </li>
                     </ul>
                     <Loader 

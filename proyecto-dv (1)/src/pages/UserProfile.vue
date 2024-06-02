@@ -53,7 +53,7 @@ export default {
             v-for="post in posts"
             class="mb-2"
         >
-            <p>{{ post.content }}</p>
+            <router-link :to="`/post/${post.id}`">{{ post.content }}</router-link>
         </li>
     </ul>
 </template>
