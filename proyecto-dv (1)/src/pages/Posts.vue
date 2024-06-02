@@ -29,6 +29,7 @@ export default {
             newPost: {
                 id: '',
                 content: '',
+                title: '',
             },
             creatingPost: false,
 
@@ -52,6 +53,7 @@ export default {
                 user_id: this.authUser.id,
                 email: this.authUser.email,
                 content: this.newPost.content,
+                title: this.newPost.title
             }).then(() => this.creatingPost = false);
             this.newPost.content = "";
         },
@@ -109,7 +111,7 @@ export default {
                             class="mb-2"
                         >
                             <p>
-                                <router-link :to="`/post/${post.id}`"><h2 class="text-4xl">Titulo</h2></router-link>
+                                <router-link :to="`/post/${post.id}`"><h2 class="text-4xl">{{ post.title }}</h2></router-link>
                                 <b>
                                     <router-link 
                                         :to="`/usuario/${post.user_id}`"
@@ -141,6 +143,19 @@ export default {
                     </div>
                     <div class="mb-3">
                         <label 
+                            for="title"
+                            class="block mb-2"
+                        >Titulo</label>
+                        <input
+                            id="title"
+                            class="w-full p-2 border border-gray-300 rounded disabled:bg-gray-100"
+                            :disabled="creatingPost"
+                            v-model="newPost.title"
+                            required
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label 
                             for="post"
                             class="block mb-2"
                         >Mensaje</label>
@@ -149,6 +164,7 @@ export default {
                             class="w-full p-2 border border-gray-300 rounded disabled:bg-gray-100"
                             :disabled="creatingPost"
                             v-model="newPost.content"
+                            required
                         ></textarea>
                     </div>
                     <button 

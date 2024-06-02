@@ -14,6 +14,7 @@ export function subscribeToUserPosts(callback, userEmail) {
                 user_id: doc.data().user_id,
                 email: doc.data().email,
                 content: doc.data().content,
+                title: doc.data().title,
                 created_at: doc.data().created_at.toDate(),
             }
         });

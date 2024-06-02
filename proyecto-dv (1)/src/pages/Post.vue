@@ -37,6 +37,7 @@ export default {
                 id: null,
                 email: null,
                 content: null,
+                title: null,
                 comments: null,
             },
             postsLoaded: false,
@@ -103,6 +104,7 @@ export default {
 
 <template>
     <p>{{ post.email }}</p>
+    <h1 class="text-4xl">{{ post.title }}</h1>
     <p>{{ post.content }}</p>
     
     <li v-for="comments in post.comments">

@@ -12,6 +12,7 @@ export default {
                 email: '',
                 password: '',
                 name: '',
+                pet: ''
             },
             loading: false,
         };
@@ -20,7 +21,7 @@ export default {
         async handleSubmit() {
             this.loading = true;
             try {
-                await register(this.user.email, this.user.password, this.user.name);
+                await register(this.user.email, this.user.password, this.user.name, this.user.pet);
                 this.$router.push({
                     path: '/perfil',
                 })
@@ -58,13 +59,26 @@ export default {
             <label 
                 for="name"
                 class="block mb-2"
-            >Nombre</label>
+            >Nombre del dueño</label>
             <input
                 type="text"
                 id="name"
                 class="w-full p-2 border border-gray-300 rounded disabled:bg-gray-100"
                 :disabled="loading"
                 v-model="user.name"
+            >
+        </div>
+        <div class="mb-3">
+            <label 
+                for="pet"
+                class="block mb-2"
+            >Nombre de la mascota</label>
+            <input
+                type="text"
+                id="pet"
+                class="w-full p-2 border border-gray-300 rounded disabled:bg-gray-100"
+                :disabled="loading"
+                v-model="user.pet"
             >
         </div>
         <div class="mb-3">

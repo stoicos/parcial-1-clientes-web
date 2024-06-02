@@ -17,6 +17,7 @@ export async function getPostById(id) {
         id: postDoc.id, // la propiedad "id" del documento retorna el id del mismo.
         email: postDoc.data().email,
         content: postDoc.data().content,
+        title: postDoc.data().title,
         comments: postDoc.data().comments
     }
 }
@@ -24,12 +25,9 @@ export async function getPostById(id) {
 export async function createComment(id, data) {
     const refPost = doc(db, `posts/${id}`);
   
-    const postDoc = await getDoc(refPost);
-
     await updateDoc(refPost, {
         saveServerTimestamp: serverTimestamp()
     });
-
     const updatedPostDoc = await getDoc(refPost);
     const serverTime = updatedPostDoc.data().saveServerTimestamp;
 

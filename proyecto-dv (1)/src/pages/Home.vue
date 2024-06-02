@@ -1,13 +1,15 @@
 <script>
 import MainH1 from '../components/MainH1.vue';
+import MainButton from '../components/MainButton.vue';
 
 export default {
     name: 'Home',
-    components: {MainH1},
+    components: {MainH1, MainButton},
 }
 </script>
 
 <template>
-    <MainH1>Les damos la bienvenida a DV Social</MainH1>
-    <p>DV Social es una red social diseñada para los alumnos y profesores de la Escuela Da Vinci.</p>
+    <MainH1>Bienvenido a Petbook</MainH1>
+    <p>Petbook es una red social de mascotas. Registrá a tu mascota y comenzá a postear.</p>
+    <MainButton>Comenzar</MainButton>
 </template>

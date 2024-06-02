@@ -43,7 +43,7 @@ onAuthStateChanged(auth, user => {
  * @param {string} name 
  * @returns {Promise<void>}
  */
-export async function register(email, password, name) {
+export async function register(email, password, name, pet) {
     try {
         const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
         console.log("Usuario creado. ID: ", userCredentials.user.uid)
@@ -52,7 +52,7 @@ export async function register(email, password, name) {
         // displayname
 
         //Creamos el perfil del usuario
-        await createUserProfile(userCredentials.user.uid, {email, name});
+        await createUserProfile(userCredentials.user.uid, {email, name, pet});
     } catch (error) {
         console.error("[auth.js register] Error al crear una cuenta: ", error.code)
         throw error;

@@ -36,7 +36,7 @@ export default {
         queramos al estilo, y Tailwind va a generar una clase para el mismo.
         Están pensados para estilos "one-off", es decir, que se usan una única vez en el proyecto. -->
         <nav class="flex justify-between h-[60px] bg-slate-300 p-4 text-gray-900">
-            <p>DV Social</p>
+            <p>Petbook</p>
             <ul class="flex gap-4">
                 <li><router-link to="/">Inicio</router-link></li>
                 <template v-if="authUser.id === null">
@@ -44,7 +44,7 @@ export default {
                     <li><router-link to="/registro">Registro</router-link></li>
                 </template>
                 <template v-else>
-                    <li><router-link to="/posts">Chat Público</router-link></li>
+                    <li><router-link to="/posts">Posts</router-link></li>
                     <li><router-link to="/perfil">Mi Perfil</router-link></li>
                     <li>
                         <form action="#" @submit.prevent="handleLogout">
