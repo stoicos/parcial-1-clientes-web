@@ -9,6 +9,7 @@ import MyProfile from "../pages/MyProfile.vue";
 import UserProfile from "../pages/UserProfile.vue";
 import Post from "../pages/Post.vue";
 import { subscribeToAuth } from "../services/auth";
+import ModifyProfile from "../pages/ModifyProfile.vue";
 
 // Definimos el array de rutas.
 const routes = [
@@ -18,6 +19,7 @@ const routes = [
     { path: '/posts',                   component: Posts,               meta: { requiresAuth: true } },
     { path: '/post/:id',                component: Post,                meta: { requiresAuth: true } },
     { path: '/perfil',                  component: MyProfile,           meta: { requiresAuth: true } },
+    { path: '/perfil/:id',              component: ModifyProfile,       meta: { requiresAuth: true } },
     { path: '/usuario/:id',             component: UserProfile,         meta: { requiresAuth: true } },
 ];
 

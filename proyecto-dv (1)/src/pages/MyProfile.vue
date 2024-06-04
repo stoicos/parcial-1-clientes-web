@@ -55,5 +55,5 @@ export default {
         </li>
     </ul>
     <hr class="border-black">
-    <p>Modificar perfil</p>
+    <router-link :to="`/perfil/${authUser.id}`">Modificar Perfil</router-link>
 </template>
