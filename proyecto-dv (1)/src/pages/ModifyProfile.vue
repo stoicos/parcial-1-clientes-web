@@ -23,7 +23,10 @@ export default {
             saveChanges(this.$route.params.id, {
                 name: this.userProfile.name,
                 pet: this.userProfile.pet
-            }) 
+            }).then(() => {
+                this.userProfile.name = "",
+                this.userProfile.pet = ""
+            })
         }
     },
     async mounted() {
@@ -41,12 +44,12 @@ export default {
 </script>
 <template>
     <p>{{ authUser.email }}</p> 
-    <p>{{ userProfile.name }}</p>
+
     <form action="#" @submit.prevent="sendChanges">
     <label for="name">Nombre</label>
-    <input type="text" name="name" id="name" v-model="userProfile.name"/>
+    <input type="text" name="name" id="name" v-model="userProfile.name" required/>
     <label for="pet">Nombre de la mascota</label>
-    <input type="text" name="pet" id="pet" v-model="userProfile.pet"/>
+    <input type="text" name="pet" id="pet" v-model="userProfile.pet" required/>
     <button type="submit">Guardar cambios</button>
     </form>
 </template>

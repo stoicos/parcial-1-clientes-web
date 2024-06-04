@@ -14,6 +14,7 @@ export default {
                 id: null,
                 name: null,
                 email: null,
+                pet: null,
             },
             authUser: {
                 id: null,
@@ -45,6 +46,7 @@ export default {
     <MainH1>Mi Perfil</MainH1>
     <p>{{ userData.email }}</p>
     <p>{{ userData.name }}</p>
+    <p>{{ userData.pet }}</p>
     <hr class="border-black">
     <ul>
         <li 
