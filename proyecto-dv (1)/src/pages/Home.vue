@@ -4,7 +4,7 @@ import MainButton from '../components/MainButton.vue';
 
 export default {
     name: 'Home',
-    components: {MainH1, MainButton},
+    components: { MainH1, MainButton },
 }
 </script>
 

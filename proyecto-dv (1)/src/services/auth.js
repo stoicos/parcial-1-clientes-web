@@ -41,6 +41,7 @@ onAuthStateChanged(auth, user => {
  * @param {string} email 
  * @param {string} password 
  * @param {string} name 
+ * @param {string} pet
  * @returns {Promise<void>}
  */
 export async function register(email, password, name, pet) {

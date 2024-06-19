@@ -7,7 +7,7 @@ import { getUserProfileById } from '../services/user-profile';
 
 export default {
     name: 'UserProfile',
-    components: {MainH1, Loader},
+    components: { MainH1, Loader },
     data() {
         return {
             user: {
@@ -19,10 +19,10 @@ export default {
                 id: null,
                 email: null,
             },
-            unsubscribeFromAuth: () => {},
+            unsubscribeFromAuth: () => { },
             userLoaded: false,
             posts: [],
-            unsubscribeFromPosts: () => {},
+            unsubscribeFromPosts: () => { },
         }
     },
     async mounted() {
@@ -49,10 +49,7 @@ export default {
         <p>{{ user.name }}</p>
     </template>
     <ul>
-        <li 
-            v-for="post in posts"
-            class="mb-2"
-        >
+        <li v-for="post in posts" class="mb-2">
             <router-link :to="`/post/${post.id}`">{{ post.content }}</router-link>
         </li>
     </ul>

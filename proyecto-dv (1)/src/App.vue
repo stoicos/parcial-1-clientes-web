@@ -5,7 +5,7 @@ import { auth } from './services/firebase';
 
 export default {
     name: 'App',
-    components: {Home},
+    components: { Home },
     data() {
         return {
             authUser: {

@@ -24,9 +24,9 @@ import { createComment, getPostById, subscribeToComments } from '../services/pos
 
 export default {
     name: 'Post',
-    components: {MainH1, Loader, MainButton},
+    components: { MainH1, Loader, MainButton },
     // data() {
-    data: function() {
+    data: function () {
         return {
             newComment: {
                 comment: '',
@@ -41,13 +41,13 @@ export default {
                 comments: null,
             },
             postsLoaded: false,
-            unsubscribeFromComments: () => {},
+            unsubscribeFromComments: () => { },
 
             authUser: {
                 id: null,
                 email: null,
             },
-            unsubscribeFromAuth: () => {},
+            unsubscribeFromAuth: () => { },
         }
     },
     methods: {
@@ -65,7 +65,7 @@ export default {
         formatDate(date) {
             // console.log("El valor que recibimos es: ", date)
             // Transformamos el objeto Date a una fecha con formato AAAA-MM-DD HH:mm:ss
-            
+
             return Intl.DateTimeFormat('es', {
                 year: 'numeric', month: '2-digit', day: '2-digit',
                 hour: '2-digit', minute: '2-digit', second: '2-digit',
@@ -85,16 +85,16 @@ export default {
             this.post.comments = commentsData.comments;
         });
 
-    
+
 
         // Guardamos la función para cancelar la suscripción.
         this.unsubscribeFromAuth = subscribeToAuth(newUserData => this.authUser = newUserData);
         // console.log("Recibimos la función para cancelar la suscripción. ", this.unsubscribeFromAuth);
-        
+
     },
     unmounted() {
         // Cancelamos todas las suscripciones.
-        
+
         this.unsubscribeFromComments();
 
         this.unsubscribeFromAuth();
@@ -106,17 +106,14 @@ export default {
     <p>{{ post.email }}</p>
     <h1 class="text-4xl">{{ post.title }}</h1>
     <p>{{ post.content }}</p>
-    
+
     <li v-for="comments in post.comments">
         {{ formatDate(comments.created_at) }}
         <router-link :to="`/usuario/${comments.user_id}`">{{ comments.email }}:</router-link>
         {{ comments.comment }}
     </li>
-    <form 
-        action="#"
-        @submit.prevent="sendComment"
-    >
-    <textarea name="comment" id="comment" v-model="newComment.comment"></textarea>
-    <MainButton>Enviar</MainButton>
+    <form action="#" @submit.prevent="sendComment">
+        <textarea name="comment" id="comment" v-model="newComment.comment"></textarea>
+        <MainButton>Enviar</MainButton>
     </form>
 </template>
